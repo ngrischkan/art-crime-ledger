@@ -1,0 +1,13 @@
+# Database files
+*.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code workspace settings (personal, not project)
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
