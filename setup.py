@@ -33,7 +33,33 @@ CREATE TABLE IF NOT EXISTS marks (
 )
 """)
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS jobs (
+    id INTEGER PRIMARY KEY,
+    mark_id INTEGER NOT NULL,
+    date TEXT NOT NULL,
+    outcome TEXT NOT NULL,
+    gross_take REAL NOT NULL,
+    expenses REAL NOT NULL DEFAULT 0,
+    net_profit REAL,
+    notes TEXT,
+    FOREIGN KEY (mark_id) REFERENCES marks(id)
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS job_crew (
+    job_id INTEGER NOT NULL,
+    crew_id INTEGER NOT NULL,
+    role_on_job TEXT NOT NULL,
+    payout REAL NOT NULL,
+    PRIMARY KEY (job_id, crew_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(id),
+    FOREIGN KEY (crew_id) REFERENCES crew(id)
+)
+""")
+
 conn.commit()
 conn.close()
 
-print("Database created. Crew table ready.")
+print("Database created.")
