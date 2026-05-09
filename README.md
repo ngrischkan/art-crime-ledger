@@ -19,28 +19,32 @@ The data is fictional but the museums and artworks are real.
 Clone the repo, then from inside the project folder:
 
 ```bash
-python setup.py        # creates the database and tables
-python seed_crew.py    # inserts the nine crew members
-python seed_marks.py   # inserts the starting set of art targets
+python setup.py              # creates the database and tables
+python seed_crew.py          # inserts the nine crew members
+python seed_marks.py         # inserts the starting set of art targets
+python record_first_job.py   # records the first historical heist
 ```
 
 Then to read the data back:
 
 ```bash
-python list_crew.py    # lists crew, sorted by skill
-python list_marks.py   # lists marks, sorted by difficulty
+python list_crew.py          # lists crew, sorted by skill
+python list_marks.py         # lists marks, sorted by difficulty
 ```
 
 The database lives in `ledger.db`. It's gitignored — you build it fresh from the scripts.
 
 ## Files
 
-- `setup.py` — schema definitions for the `crew` and `marks` tables
+- `setup.py` — schema definitions for the `crew`, `marks`, `jobs`, and `job_crew` tables
 - `seed_crew.py` — populates the crew table
 - `seed_marks.py` — populates the marks table
 - `list_crew.py` — reads and displays the crew
 - `list_marks.py` — reads and displays the marks
+- `record_first_job.py` — records the crew's first historical heist (a Rodin sculpture lifted in August 2023)
 
 ## Status
 
-Early days. The crew exists, the targets exist, but no jobs have been pulled yet. Coming next: the `jobs` table, a simulator that runs heists and writes outcomes to the database, and analysis on the resulting data.
+Four tables: `crew`, `marks`, `jobs`, `job_crew`. The crew exists, the targets exist, and the books now record one historical job — a Rodin sculpture lifted in August 2023.
+
+Coming next: a simulator that runs jobs procedurally, and JOIN-based analysis queries for spotting patterns across multiple jobs.
