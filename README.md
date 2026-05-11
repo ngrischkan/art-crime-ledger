@@ -2,6 +2,8 @@
 
 A Python and SQLite simulation of a fictional art crime ring operating in present-day Paris. The project is the books — the operational records of a nine-person crew that targets museums, forges replacements, and moves art through the underground market. Built to learn data engineering by building a world.
 
+**Live dashboard:** https://grischkan-art-crime-ledger.streamlit.app
+
 ## The World
 
 Paris, present day. The crew is nine: a former curator turned mastermind, a Dutch security specialist who cracks museum vaults, a getaway driver out of Marseille, a Swedish art critic with a real byline and a real second life, and others. They target the Louvre, the Orsay, the Marmottan, the Pompidou. Some jobs go clean. Some don't.
@@ -46,7 +48,7 @@ To cool down the crew over time:
 python decay_heat.py   # reduces every crew member's heat by 1 (min 0)
 ```
 
-The database lives in `ledger.db`. It's gitignored — you build it fresh from the scripts.
+The database lives in `ledger.db`. It's included in the repo — clone and run the dashboard directly.
 
 ## Files
 
