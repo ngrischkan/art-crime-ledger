@@ -292,7 +292,13 @@ fig2 = go.Figure(go.Bar(
     textfont=dict(color=CREAM, size=11),
     hovertemplate="%{x}<br>%{y} job(s)<extra></extra>",
 ))
-st.plotly_chart(_style(fig2, "Times Targeted"), use_container_width=True)
+_style(fig2, "Times Targeted")
+fig2.update_layout(
+    height=480,
+    margin=dict(l=12, r=12, t=18, b=120),
+    xaxis=dict(tickangle=45),
+)
+st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown('<hr class="sec-hr">', unsafe_allow_html=True)
 
