@@ -64,7 +64,16 @@ def run_job(cursor, mark_id, crew_ids):
     net_profit = gross_take - expenses - total_payouts
     cursor.execute("UPDATE jobs SET net_profit = ? WHERE id = ?", (net_profit, job_id))
 
-    # Step 11: return outcome
+    # Step 11: update heat
+    heat_delta = 3 if outcome == "botched" else 1 if outcome == "clean" else 0
+    if heat_delta:
+        placeholders = ",".join("?" * len(crew_ids))
+        cursor.execute(
+            f"UPDATE crew SET heat = heat + ? WHERE id IN ({placeholders})",
+            [heat_delta, *crew_ids],
+        )
+
+    # Step 12: return outcome
     return outcome
 
 
