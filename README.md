@@ -12,7 +12,7 @@ The data is fictional but the museums and artworks are real.
 
 - Python 3
 - SQLite (built in, no installation needed)
-- No external dependencies yet
+- Streamlit (for the dashboard — `pip install streamlit`)
 
 ## Running It
 
@@ -22,6 +22,7 @@ Clone the repo, then from inside the project folder:
 python setup.py        # creates the database and four tables
 python seed_crew.py    # inserts the nine crew members
 python expand_marks.py # inserts 24 real Paris artworks with auto-calculated difficulty
+python simulator.py    # generates 50 jobs with randomized outcomes and updates crew heat
 ```
 
 Then to read the data back:
@@ -30,6 +31,19 @@ Then to read the data back:
 python list_crew.py    # lists crew, sorted by skill
 python list_marks.py   # lists marks, sorted by difficulty
 python list_jobs.py    # lists all recorded jobs with crew and payouts
+python analysis.py     # prints earnings, target frequency, and museum success rates
+```
+
+To run the dashboard:
+
+```bash
+python -m streamlit run dashboard.py
+```
+
+To cool down the crew over time:
+
+```bash
+python decay_heat.py   # reduces every crew member's heat by 1 (min 0)
 ```
 
 The database lives in `ledger.db`. It's gitignored — you build it fresh from the scripts.
@@ -39,12 +53,18 @@ The database lives in `ledger.db`. It's gitignored — you build it fresh from t
 - `setup.py` — schema definitions for the `crew`, `marks`, `jobs`, and `job_crew` tables
 - `seed_crew.py` — populates the crew table with nine members
 - `expand_marks.py` — populates the marks table with 24 real Paris artworks; auto-calculates security difficulty based on museum tier and estimated value
+- `simulator.py` — picks a random mark, assembles a 4–6 person crew, rolls outcome based on skill vs difficulty, writes the job to the database, and updates crew heat
+- `decay_heat.py` — reduces every crew member's heat by 1 (min 0); run it to simulate time passing between jobs
 - `list_crew.py` — reads and displays the crew, sorted by skill
 - `list_marks.py` — reads and displays all marks, sorted by difficulty
 - `list_jobs.py` — reads and displays all recorded jobs with crew payouts, using JOIN queries across four tables
+- `analysis.py` — three summary queries: total earnings per crew member, most-targeted artworks, clean job success rate by museum
+- `dashboard.py` — Streamlit dashboard visualizing the analysis queries as charts and tables
+
+## Heat System
+
+Every crew member carries a heat value. After a clean job, each participant gains 1 heat. After a botched job, each participant gains 3. Partial jobs carry no heat. Run `decay_heat.py` to tick heat down by 1 across the board — simulating time passing and attention fading.
 
 ## Status
 
-Four tables: `crew`, `marks`, `jobs`, `job_crew`. Nine crew members, 24 marks across five Paris museums and two private galleries. No jobs on the books yet — the simulator is next.
-
-Coming next: `simulator.py` — a function that picks a mark, assembles a crew, rolls the outcome based on skill vs difficulty, and writes the result to the database. Run it once and generate a full year of heists.
+Four tables: `crew`, `marks`, `jobs`, `job_crew`. Nine crew members, 24 marks across five Paris museums and two private galleries. 50 simulated jobs on the books. Streamlit dashboard live.
