@@ -19,17 +19,17 @@ The data is fictional but the museums and artworks are real.
 Clone the repo, then from inside the project folder:
 
 ```bash
-python setup.py              # creates the database and tables
-python seed_crew.py          # inserts the nine crew members
-python seed_marks.py         # inserts the starting set of art targets
-python record_first_job.py   # records the first historical heist
+python setup.py        # creates the database and four tables
+python seed_crew.py    # inserts the nine crew members
+python expand_marks.py # inserts 24 real Paris artworks with auto-calculated difficulty
 ```
 
 Then to read the data back:
 
 ```bash
-python list_crew.py          # lists crew, sorted by skill
-python list_marks.py         # lists marks, sorted by difficulty
+python list_crew.py    # lists crew, sorted by skill
+python list_marks.py   # lists marks, sorted by difficulty
+python list_jobs.py    # lists all recorded jobs with crew and payouts
 ```
 
 The database lives in `ledger.db`. It's gitignored — you build it fresh from the scripts.
@@ -37,14 +37,14 @@ The database lives in `ledger.db`. It's gitignored — you build it fresh from t
 ## Files
 
 - `setup.py` — schema definitions for the `crew`, `marks`, `jobs`, and `job_crew` tables
-- `seed_crew.py` — populates the crew table
-- `seed_marks.py` — populates the marks table
-- `list_crew.py` — reads and displays the crew
-- `list_marks.py` — reads and displays the marks
-- `record_first_job.py` — records the crew's first historical heist (a Rodin sculpture lifted in August 2023)
+- `seed_crew.py` — populates the crew table with nine members
+- `expand_marks.py` — populates the marks table with 24 real Paris artworks; auto-calculates security difficulty based on museum tier and estimated value
+- `list_crew.py` — reads and displays the crew, sorted by skill
+- `list_marks.py` — reads and displays all marks, sorted by difficulty
+- `list_jobs.py` — reads and displays all recorded jobs with crew payouts, using JOIN queries across four tables
 
 ## Status
 
-Four tables: `crew`, `marks`, `jobs`, `job_crew`. The crew exists, the targets exist, and the books now record one historical job — a Rodin sculpture lifted in August 2023.
+Four tables: `crew`, `marks`, `jobs`, `job_crew`. Nine crew members, 24 marks across five Paris museums and two private galleries. No jobs on the books yet — the simulator is next.
 
-Coming next: a simulator that runs jobs procedurally, and JOIN-based analysis queries for spotting patterns across multiple jobs.
+Coming next: `simulator.py` — a function that picks a mark, assembles a crew, rolls the outcome based on skill vs difficulty, and writes the result to the database. Run it once and generate a full year of heists.
