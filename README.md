@@ -14,7 +14,7 @@ The data is fictional but the museums and artworks are real.
 
 - Python 3
 - SQLite (built in, no installation needed)
-- Streamlit (for the dashboard — `pip install streamlit`)
+- Streamlit + Plotly (for the dashboard — `pip install -r requirements.txt`)
 
 ## Running It
 
