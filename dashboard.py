@@ -76,10 +76,11 @@ st.markdown(f"""
   }}
   .kpi-value {{
       color: {LIME};
-      font-size: 1.95rem;
+      font-size: 1.55rem;
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.01em;
+      white-space: nowrap;
   }}
   .kpi-sub {{
       color: {CREAM}50;
