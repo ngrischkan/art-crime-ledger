@@ -7,7 +7,7 @@ cursor = conn.cursor()
 # Create the crew table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS crew (
-    id INTEGER PRIMARY KEY,
+    crew_id INTEGER PRIMARY KEY,
     nickname TEXT NOT NULL,
     real_name TEXT NOT NULL,
     age INTEGER,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS crew (
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS marks (
-    id INTEGER PRIMARY KEY,
+    mark_id INTEGER PRIMARY KEY,
     title TEXT NOT NULL,
     artist TEXT NOT NULL,
     year_created INTEGER,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS marks (
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS jobs (
-    id INTEGER PRIMARY KEY,
+    job_id INTEGER PRIMARY KEY,
     mark_id INTEGER NOT NULL,
     date TEXT NOT NULL,
     outcome TEXT NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     expenses REAL NOT NULL DEFAULT 0,
     net_profit REAL,
     notes TEXT,
-    FOREIGN KEY (mark_id) REFERENCES marks(id)
+    FOREIGN KEY (mark_id) REFERENCES marks(mark_id)
 )
 """)
 
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS job_crew (
     role_on_job TEXT NOT NULL,
     payout REAL NOT NULL,
     PRIMARY KEY (job_id, crew_id),
-    FOREIGN KEY (job_id) REFERENCES jobs(id),
-    FOREIGN KEY (crew_id) REFERENCES crew(id)
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    FOREIGN KEY (crew_id) REFERENCES crew(crew_id)
 )
 """)
 
