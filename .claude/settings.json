@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "PowerShell(python \"c:\\\\Users\\\\Noah Grischkan\\\\Projects\\\\art-crime-ledger\\\\setup.py\")",
+      "PowerShell(python \"c:\\\\Users\\\\Noah Grischkan\\\\Projects\\\\art-crime-ledger\\\\setup_forgeries.py\")"
     ]
   }
 }
